@@ -1,5 +1,7 @@
 # RISC-V CPU Project
 
+## Makerchip Project Link : https://makerchip.com/sandbox/073fmhqpA/0r0h8Ar#
+
 ## Overview
 
 This project aims to build a RISC-V CPU capable of executing instructions to perform basic arithmetic operations. Initially, the primary goal was to create a processor that could count the first 10 natural numbers using the ADDI (Add immediate) instruction. Subsequently, additional instructions were implemented to enhance functionality.
@@ -25,9 +27,10 @@ The implementation of the RISC-V CPU proceeded through the following steps:
 
 Makerchip software offers several advantages for developing and testing digital designs:
 
-- **Visual Diagram Representation:** Provides visual aids for understanding the architecture and signal flow of the CPU.
-- **Built-in Simulation Environment:** Eliminates the need for separate testbench development by providing waveform outputs directly within the software.
+- **Organized Diagrams:** Designs are represented in logic diagrams. TL-Verilog design hierarchy, including pipelines and pipeline stages, provides organization to your logic diagrams. Below, the path through $ANY ovals shows the flow a transaction will follow through an example design.
+- **Organized Waveforms:** Waveforms are organized by TL-Verilog design hierarchy. Waveforms clearly show when signals are carrying meaningful data.
 - **Signal Randomization:** Facilitates thorough testing by generating randomized signals for comprehensive simulation scenarios.
+- **Tool Integration:**Makerchip can easily be launched as a Verilog/TL-Verilog editor from other applications. For example, Makerchip provides the digital side of FOSSEE's mixed-signal eSim environment, and SandPiper-SaaS provides eSim's TL-Verilog compilation. It also provides Verilog code for better understanding after compilation of TL-Verilog code.
 
 ## Getting Started
 
