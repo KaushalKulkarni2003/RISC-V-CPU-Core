@@ -40,3 +40,17 @@ To get started with this project, follow these steps:
 5. Refer to the provided documentation or code comments for further details on specific components and functionality.
 
 ![Final Core](lib/riscv.svg)
+
+## Finished!
+
+Congratulations!!!
+
+After completing this course, we hope you are inspired to continue your journey. These ideas might help:
+  - Try the tutorials in [Makerchip](https://makerchip.com).
+  - Learn more about [TL-Verilog](https://redwoodeda.com/tl-verilog).
+  - Explore the [RISC-V](https://riscv.org) ecosystem.
+  - Take [other courses](https://training.linuxfoundation.org/full-catalog/) from [Linux Foundation](https://www.linuxfoundation.org/)
+  - Discover [other training](https://www.redwoodeda.com/publications) from [Redwood EDA, LLC](https://redwoodeda.com)
+  - Get your core running on real hardware using FPGAs [in the cloud](https://github.com/stevehoover/1st-CLaaS) or [on your desktop](https://github.com/shivanishah269/risc-v-core/).
+  - Install [TL-Verilog tools](https://www.redwoodeda.com/products).
+  - Learn about the [WARP-V](https://github.com/stevehoover/warp-v) TL-Verilog CPU core generator.
