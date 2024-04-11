@@ -163,12 +163,74 @@
    
    `BOGUS_USE($is_addi $is_add $is_beq $is_bge $is_bgeu $is_blt $is_bltu $is_bne $dec_bits)
 
+   // ALU Logic
+   
+   $result[31:0] = 
+     $is_addi   ? $src1_value + $imm :
+     $is_add    ? $src1_value + $src2_value :
+
+     $is_andi   ? $src1_value & $imm :
+     $is_ori    ? $src1_value | $imm :
+     $is_xori   ? $src1_value ^ $imm :
+
+     $is_slli   ? $src1_value << $imm[5:0] :
+     $is_srli   ? $src1_value >> $imm[5:0] :
+
+     $is_and    ? $src1_value & $src2_value :
+     $is_or     ? $src1_value | $src2_value :
+     $is_xor    ? $src1_value ^ $src2_value :
+
+     $is_sub    ? $src1_value - $src2_value :
+     $is_sll    ? $src1_value << $src2_value[4:0] :
+     $is_srl    ? $src1_value >> $src2_value[4:0] :
+
+     $is_sltu   ? $sltu_rslt :
+     $is_sltiu  ? $sltiu_rslt :
+
+     $is_lui    ? {$imm[31:12], 12'b0} :
+     $is_auipc  ? $pc + $imm :
+     $is_jal    ? $pc + 32'd4 :
+     $is_jalr   ? $pc + 32'd4 :
+
+     $is_slt    ? ($src1_value[31] == $src2_value[31]) ? 
+                     $sltu_rslt :
+                     {31'b0, $src1_value[31]} :
+     $is_slti   ? ($src1_value[31] == $imm[31]) ?
+                     $sltiu_rslt : 
+                     {31'b0, $src1_value[31]} :  
+
+     $is_sra    ? $sra_rslt[31:0] :
+     $is_srai   ? $srai_rslt[31:0] :
+
+     $is_load ? $src1_value[31:0] + $imm[31:0] :  
+     $is_s_instr ? $src1_value[31:0] + $imm[31:0] :
+
+                 32'b0;
+                 
+   // branch logic
+   
+   $taken_br =
+      $is_beq  ? ($src1_value == $src2_value) :
+      $is_bne  ? ($src1_value != $src2_value) :
+      $is_blt  ? ($src1_value < $src2_value) ^ ($src1_value[31] != $src2_value[31]) :
+      $is_bge  ? ($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31]) :
+      $is_bltu ? ($src1_value < $src2_value) :
+      $is_bgeu ? ($src1_value >= $src2_value) :
+                 1'b0;
+   
+   $br_tgt_pc[31:0] = $pc[31:0] + $imm[31:0];
+   
    // ...
    
    
    // Assert these to end simulation (before Makerchip cycle limit).
    *passed = 1'b0;
    *failed = *cyc_cnt > M4_MAX_CYC;
+   
+   // Register file
+   $rf_wr_data[31:0] = 
+     $is_load ? $ld_data[31:0] :
+               $result[31:0];
    
    m4+rf(32, 32, $reset,
          $rd_valid & ~($rd == 5'b0), $rd[4:0], $rf_wr_data[31:0],
